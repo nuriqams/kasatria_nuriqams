@@ -3,55 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google Sign-In Example</title>
+  <title>Google Login Redirect</title>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-</head>
-<body>
-  <h1>Google Sign-In Example</h1>
-  <!-- Google Sign-In Button -->
-  <div id="g_id_onload"
-       data-client_id="685424294823-a8fvr00a93j8ic2eni4sq63oich7g7nr.apps.googleusercontent.com"
-       data-login_uri="https://nuriqams.github.io"
-       data-auto_prompt="false">
-  </div>
-  <div class="g_id_signin"
-       data-type="standard"
-       data-size="large"
-       data-theme="outline"
-       data-text="sign_in_with"
-       data-shape="rectangular"
-       data-logo_alignment="left">
-  </div>
-
   <script>
     function handleCredentialResponse(response) {
       console.log("Encoded JWT ID token: " + response.credential);
-      // Decode and display the user's information (optional)
-      const userInfo = parseJwt(response.credential);
-      console.log("User Info: ", userInfo);
-      alert(`Hello, ${userInfo.name}`);
+
+      // Decode the ID token if needed (optional for debugging)
+      const userInfo = JSON.parse(atob(response.credential.split('.')[1]));
+      console.log("User Info:", userInfo);
+
+      // Redirect to the desired page
+      window.location.href = "css3d_periodictable.html";
     }
 
-    function parseJwt(token) {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(
-        atob(base64)
-          .split('')
-          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-          .join('')
-      );
-      return JSON.parse(jsonPayload);
-    }
-
-    // Attach the callback to handle sign-in
-    window.onload = () => {
+    window.onload = function () {
       google.accounts.id.initialize({
         client_id: "685424294823-a8fvr00a93j8ic2eni4sq63oich7g7nr.apps.googleusercontent.com",
         callback: handleCredentialResponse,
       });
-      google.accounts.id.prompt(); // Show the Google One Tap prompt
+
+      google.accounts.id.renderButton(
+        document.getElementById("buttonDiv"),
+        { theme: "outline", size: "large" } // Customize the button
+      );
+
+      google.accounts.id.prompt(); // Show the One Tap prompt
     };
   </script>
+</head>
+<body>
+  <h1>Login with Google</h1>
+  <div id="buttonDiv"></div>
 </body>
 </html>
