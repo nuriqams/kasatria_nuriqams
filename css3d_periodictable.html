@@ -126,6 +126,8 @@
     const data = await response.json();
 
     console.log("Raw Data:", data.values); // Debugging log
+	console.log(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`);
+
 
     // Safely map the data and ensure it's in the expected format
     const table = data.values.slice(1).map((row) => ({
