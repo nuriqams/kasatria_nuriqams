@@ -1,0 +1,13 @@
+{
+    "name": "ariqah/kasatria_nuriqams",
+    "description": "work assignment for kasatria",
+    "authors": [
+        {
+            "name": "Ariqah",
+            "email": "nuriqams@gmail.com"
+        }
+    ],
+    "require": {
+        "google/apiclient": "^2.0"
+    }
+}
