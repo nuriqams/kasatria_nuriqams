@@ -113,7 +113,7 @@
 				try {
 					const SHEET_ID = "1wBNTGX5LdR9jqk_TvXaOmYyDyAVqBpwmLZO3G0xGiNU";
 					const API_KEY = "AIzaSyB1JlCIVrZDgWUR9MPhQW0fuOsnjAQkBZk";
-					const RANGE = "Sheet1!A1:E";
+					const RANGE = "Sheet1!A1:Z";
 
 					const fetchData = async () => {
 					const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`);
@@ -124,7 +124,7 @@
 						console.error("Error fetching data:", response.status, response.statusText);
 					}
 					};
-					
+
 				// Safely map the data and ensure it's in the expected format
 				table = data.slice(1).map((row) => ({
 					Name: row[0] || "",
