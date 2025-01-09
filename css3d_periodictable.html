@@ -103,9 +103,9 @@
 		<script type="module">
 
 			import * as THREE from 'three';
-			import TWEEN from './tween.module.js';
-			import { TrackballControls } from './TrackballControls.js';
-			import { CSS3DRenderer, CSS3DObject } from './CSS3DRenderer.js';
+			import TWEEN from 'three/addons/libs/tween.module.js';
+			import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
+			import { CSS3DRenderer, CSS3DObject } from 'three/addons/renderers/CSS3DRenderer.js';
 
 			let table = []; // Declare the variable outside to make it accessible
 
@@ -156,7 +156,7 @@
 					console.log("Data fetched successfully:", table);
 					init(); // Initialize the 3D scene
 					animate(); // Start animation
-					
+
 			} catch (error) {
 				console.error("Error initializing data and scene:", error);
 			}
